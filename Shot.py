@@ -2,15 +2,16 @@ from random import randint
 from time import sleep
 
 
-def set_shot(active_player, targeted_player):
+def set_shot(active_player, targeted_player, ki=None):
 
     shot_generator = npc_shot if active_player.is_npc else user_shot
-    shot_coords = shot_generator(active_player.board)
-    targeted_player.process_incoming_shot(shot_coords)
+    shot_coords = shot_generator(active_player.board, ki)
+    game_goes_on = targeted_player.process_incoming_shot(shot_coords)
     targeted_player.update_board()
+    return game_goes_on
 
 
-def user_shot(board):
+def user_shot(board, *args):
     go_on = True
     while(go_on):
         try:
@@ -26,9 +27,8 @@ def user_shot(board):
     return shot_coords
 
 
-def npc_shot(board):
+def npc_shot(board, ki=None):
     x = randint(0, board.width-1)
     y = randint(0, board.height-1)
-    sleep(1)
+    sleep(0.5)
     return (x, y)
-
