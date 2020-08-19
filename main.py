@@ -34,5 +34,14 @@ if __name__ == "__main__":
     build_all_ships(player=playerNPC)
 
     while(True):
-        set_shot(active_player=player1, targeted_player=playerNPC)
-        set_shot(active_player=playerNPC, targeted_player=player1)
+        active_player = player1
+        targeted_player = playerNPC
+        game_goes_on = set_shot(active_player, targeted_player)
+        if not game_goes_on:
+            break
+        active_player = playerNPC
+        targeted_player = player1
+        game_goes_on = set_shot(active_player, targeted_player)
+        if not game_goes_on:
+            break
+    msg_hub.notify(active_player.name, "HAT GEWONNEN!")

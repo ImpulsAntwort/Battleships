@@ -9,8 +9,8 @@ class MessageHub:
 
     def notify(self, plr_name, msg):
         self.msg_buffer.append([plr_name, msg])
-        if len(self.msg_buffer) > 10:
-            self.msg_buffer = self.msg_buffer[-10:]
+        if len(self.msg_buffer) > 6:
+            self.msg_buffer = self.msg_buffer[-6:]
 
     def msg_out(self):
         msg = []
