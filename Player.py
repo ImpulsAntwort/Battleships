@@ -1,4 +1,3 @@
-from sys import exit
 
 
 class Observable:
@@ -57,6 +56,7 @@ class Player(Observable):
 
     def process_incoming_shot(self, shot_coords):
         any_ship_hit = False
+        game_goes_on = True
 
         for ship in self.ships:
             if ship.is_hit(shot_coords):
@@ -71,10 +71,13 @@ class Player(Observable):
                                 self.name, "hat alle Schiffe verloren!")
                             self.notify_observer_msg(
                                 self.name, "HAT VERLOREN")
-                            exit()
+                            game_goes_on = False
+
                 break
         if not any_ship_hit:
             self.missed_shots.add(shot_coords)
+
+        return game_goes_on
 
     def all_ships_destroyed(self):
         all_ships_lost = True
