@@ -27,12 +27,12 @@ class GameVis():
         border_l = "| "
         border_r = " |"
 
-        self.print_separator(1 + len(border_l) +
+        self.print_separator(len(border_l) +
                              len(border_r) + max_msg_len, "-")
         for line in msg:
             new_line = border_l + line + " "*(max_msg_len-len(line)) + border_r
             print(new_line)
-        self.print_separator(1 + len(border_l) +
+        self.print_separator(len(border_l) +
                              len(border_r) + max_msg_len, "-")
 
     def render(self):
